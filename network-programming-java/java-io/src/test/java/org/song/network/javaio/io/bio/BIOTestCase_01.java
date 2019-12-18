@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.song.network.javaio.utils.ExecutorUtils;
+import org.song.network.javaio.utils.IOUtils;
 
 import java.io.*;
 import java.net.InetAddress;
@@ -57,9 +58,7 @@ public class BIOTestCase_01 {
 
         System.out.println("结束 " + body);
 //        TimeUnit.SECONDS.sleep(10);
-        writer.close();
-        reader.close();
-        socket.close();
+        IOUtils.close(reader, writer, socket);
     }
 
     /**
@@ -112,9 +111,7 @@ public class BIOTestCase_01 {
 
         writer.flush();
 
-        reader.close();
-        writer.close();
-        serverSocket.close();
+        IOUtils.close(reader, writer, socket);
     }
 
     /**
@@ -181,26 +178,12 @@ public class BIOTestCase_01 {
 
                 writer.flush();
 
-                reader.close();
-                writer.close();
+                IOUtils.close(reader, writer, socket);
 
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
-                if (reader != null) {
-                    try {
-                        reader.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-                if (writer != null) {
-                    try {
-                        writer.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
+                IOUtils.close(reader, writer, socket);
             }
         });
     }
