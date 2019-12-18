@@ -1,6 +1,7 @@
 package org.song.network.javaio.io.nio;
 
 import org.junit.jupiter.api.Test;
+import org.song.network.javaio.utils.IOUtils;
 
 import java.io.*;
 import java.net.InetSocketAddress;
@@ -46,9 +47,7 @@ public class NIOTestCase_01 {
             }
             System.out.println("client 收到服务端消息 :" + body);
         }
-        writer.close();
-        reader.close();
-        socket.close();
+        IOUtils.close(writer, reader, socket);
     }
 
     /**
