@@ -102,7 +102,7 @@ public class FileTestCase {
         Files.createDirectories(Paths.get("D:\\临时\\temp\\createtwo\\son"));
         // 创建文件
         // 必须先有目录，才能在目录中创建文件。
-        Files.createFile(Paths.get("D:\\临时\\temp\\test2.txt"));
+        Files.createFile(Paths.get("D:\\临时\\temp\\mappedByteBuffer_OS.txt"));
     }
 
     /******************Path***********************/
