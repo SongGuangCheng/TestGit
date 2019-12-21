@@ -14,7 +14,7 @@ import java.net.Socket;
 
 /**
  * socket IO demo
- * BIO
+ * BIO, 单线程方式, 和线程池方式
  * <p>
  * 总结
  * 1. socket IO 服务端 有两个阻塞点, BIO模型中, 两个阻塞点分配在不同的线程中处理, 一般使用一个线程循环处理连接请求, 使用一线线程池处理获取请求数据并进行业务处理
@@ -34,8 +34,7 @@ public class BIOTestCase_01 {
 
     @Test
     public void client() throws IOException, InterruptedException {
-        // 目标IP和端口
-        // 客户端IP是当前地址IP, 客户端端口是随机端口
+        // 目标IP和端口(注意: 客户端IP是当前地址IP, 客户端端口是随机端口)
         Socket socket = new Socket(ip, port);
         // 可以手动指定客户端端口
 //        socket.bind(new InetSocketAddress(60428));
@@ -53,10 +52,10 @@ public class BIOTestCase_01 {
             if (body == null || "end".equals(body)) {
                 break;
             }
-            System.out.println("client 收到服务端消息 :" + body);
+            System.out.println("client: 收到服务端消息 :" + body);
         }
 
-        System.out.println("结束 " + body);
+        System.out.println("client: 结束 " + body);
 //        TimeUnit.SECONDS.sleep(10);
         IOUtils.close(reader, writer, socket);
     }
@@ -87,6 +86,8 @@ public class BIOTestCase_01 {
         // TODO 阻塞点1, 阻塞等待(系统)客户端建立连接()
         Socket socket = serverSocket.accept();
 
+        System.out.println("Server: 收到新连接 " + socket.getInetAddress().toString());
+
         // 获取 输入流 输出流
         BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 //        PrintWriter writer = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()), true);
@@ -101,7 +102,7 @@ public class BIOTestCase_01 {
             if (body == null || "end".equals(body)) {
                 break;
             }
-            System.out.println("Server 收到客户端消息 :" + body);
+            System.out.println("Server: 收到客户端消息 :" + body);
         }
 
         writer.write("Server response: hello !");
