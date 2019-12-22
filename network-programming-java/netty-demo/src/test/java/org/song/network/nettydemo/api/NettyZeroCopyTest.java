@@ -1,9 +1,6 @@
 package org.song.network.nettydemo.api;
 
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.ByteBufAllocator;
-import io.netty.buffer.CompositeByteBuf;
-import io.netty.buffer.Unpooled;
+import io.netty.buffer.*;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -71,6 +68,21 @@ public class NettyZeroCopyTest {
         ByteBuf byteBuf = null;
         ByteBuf header = byteBuf.slice(0, 5);
         ByteBuf body = byteBuf.slice(5, 10);
+    }
+
+    /**
+     * netty 内存池化
+     */
+    @Test
+    public void pooled_test() {
+
+        // 池化缓冲区
+        PooledByteBufAllocator pooledByteBufAllocator = new PooledByteBufAllocator();
+//        pooledByteBufAllocator.directArenas()
+
+        // 未池化缓冲区
+        UnpooledByteBufAllocator unpooledByteBufAllocator = new UnpooledByteBufAllocator(false);
+
     }
 
 }
