@@ -12,6 +12,7 @@
     <modules>
         <module>java-io</module>
         <module>netty-demo</module>
+        <module>netty5-demo</module>
     </modules>
 
     
