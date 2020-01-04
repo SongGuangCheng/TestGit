@@ -35,7 +35,7 @@ public class AIOTestCase_01 {
             assc.bind(new InetSocketAddress(port));
 
             System.out.println("server start , port : " + port);
-            //进行阻塞
+            // 不阻塞
             assc.accept(this, new CompletionHandler<AsynchronousSocketChannel, AIOTestCase_01>() {
                 /**
                  * 处理完成回调
@@ -130,5 +130,20 @@ public class AIOTestCase_01 {
         } catch (IOException | InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
+    }
+
+    @Test
+    public void client2() throws Exception {
+        AIOTestCase_Client02 c1 = new AIOTestCase_Client02(port);
+        AIOTestCase_Client02 c2 = new AIOTestCase_Client02(port);
+        AIOTestCase_Client02 c3 = new AIOTestCase_Client02(port);
+
+        Thread.sleep(1000);
+
+        c1.write("c1 aaa");
+        c2.write("c2 bbbb");
+        c3.write("c3 ccccc");
+
+        Thread.sleep(1000);
     }
 }
