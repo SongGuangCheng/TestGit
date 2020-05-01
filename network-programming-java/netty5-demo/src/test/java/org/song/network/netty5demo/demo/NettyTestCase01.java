@@ -35,9 +35,9 @@ public class NettyTestCase01 {
 
         bootstrap.group(pGroup, cGroup);
         bootstrap
-                // 设置TCP 协议
+                // 设置TCP 协议, 对应NIO中ServerSocketChannel
                 .channel(NioServerSocketChannel.class)
-                // 设置处理器
+                // 设置处理器.类似于Reactor中的handler
                 .childHandler(new ChannelInitializer() {
 
                     @Override
