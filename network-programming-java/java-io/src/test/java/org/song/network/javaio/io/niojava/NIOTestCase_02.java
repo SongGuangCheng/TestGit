@@ -1,4 +1,4 @@
-package org.song.network.javaio.io.nio;
+package org.song.network.javaio.io.niojava;
 
 import org.junit.jupiter.api.Test;
 
