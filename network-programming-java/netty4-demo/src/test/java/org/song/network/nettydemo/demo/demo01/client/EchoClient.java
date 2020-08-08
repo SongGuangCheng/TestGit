@@ -1,4 +1,4 @@
-package org.song.network.nettydemo.demo.client;
+package org.song.network.nettydemo.demo.demo01.client;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
@@ -28,15 +28,15 @@ import java.net.InetSocketAddress;
  * 完成了客户端，你便可以着手构建并测试该系统了。
  */
 public class EchoClient {
-    private final String host;
-    private final int port;
+    private static final String host = "localhost";
+    private static final int port = 9999;
 
-    public EchoClient(String host, int port) {
-        this.host = host;
-        this.port = port;
+
+    public static void main(String[] args) throws Exception {
+        start();
     }
 
-    public void start() throws Exception {
+    public static void start() throws Exception {
         // 1.
         EventLoopGroup group = new NioEventLoopGroup();
         try {
@@ -52,12 +52,8 @@ public class EchoClient {
 //                    .option(ChannelOption.TCP_NODELAY, true)
 
                     // 6. 在创建Channel时， 向 ChannelPipeline 中添加一个 Echo-ClientHandler 实例
-                    .handler(new ChannelInitializer<SocketChannel>() {
-                        @Override
-                        public void initChannel(SocketChannel ch) throws Exception {
-                            ch.pipeline().addLast(new EchoClientHandler());
-                        }
-                    });
+                    // 自定义初始化器
+                    .handler(new EchoClientInitializer());
 
             //连接到远程节点，阻塞等待直到连接完成
             ChannelFuture f = b.connect().sync();
@@ -67,19 +63,5 @@ public class EchoClient {
             //关闭线程池并且释放所有的资源
             group.shutdownGracefully().sync();
         }
-    }
-
-    public static void main(String[] args) throws Exception {
-//        if (args.length != 2) {
-//            System.err.println("Usage: " + EchoClient.class.getSimpleName() +
-//                            " <host> <port>");
-//            return;
-//        }
-//        String host = args[0];
-//        int port = Integer.parseInt(args[1]);
-
-        String host = "localhost";
-        int port = 9999;
-        new EchoClient(host, port).start();
     }
 }

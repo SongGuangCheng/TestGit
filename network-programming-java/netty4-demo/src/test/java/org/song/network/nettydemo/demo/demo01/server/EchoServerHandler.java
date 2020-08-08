@@ -1,4 +1,4 @@
-package org.song.network.nettydemo.demo.server;
+package org.song.network.nettydemo.demo.demo01.server;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -9,6 +9,9 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.util.CharsetUtil;
 
 /**
+ * 自定义处理器,
+ * Inbound: 指的是数据请求处理
+ *
  * 所有的 Netty 服务器都需要以下两部分。
  * 1. 至少一个 ChannelHandler — 该组件实现了服务器对从客户端接收的数据的处理，即
  * 它的业务逻辑。

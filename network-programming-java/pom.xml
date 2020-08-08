@@ -12,7 +12,8 @@
     <modules>
         <module>java-io</module>
         <module>netty4-demo</module>
-        <module>netty5-demo</module>
+<!--        netty5已被官方抛-->
+<!--        <module>netty5-demo</module>-->
     </modules>
 
     
