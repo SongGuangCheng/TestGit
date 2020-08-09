@@ -25,6 +25,8 @@ public class FirstServerHandler extends SimpleChannelInboundHandler<HttpObject> 
      */
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, HttpObject msg) throws Exception {
+        System.out.println("具体请求: " + msg.getClass());
+        System.out.println("远程地址(客户端): " + ctx.channel().remoteAddress());
         if (msg instanceof HttpRequest) {
             HttpRequest httpRequest = (HttpRequest) msg;
             System.out.println("请求方法名: " + httpRequest.getMethod().name());

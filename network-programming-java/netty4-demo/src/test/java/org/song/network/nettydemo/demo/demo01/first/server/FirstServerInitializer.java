@@ -25,6 +25,9 @@ public class FirstServerInitializer extends ChannelInitializer<SocketChannel> {
          * 响应数据的处理顺序反过来从下到上依次处理
          * 一般业务handler都在在最后
          * 2. 参数 name 可以不用指定(netty会默认指定), 名称可以自定义
+         *
+         * HttpServerCodec 组合了, HttpRequestDecoder  HttpResponseEncoder
+         * HTTP请求响应的编解码处理器
          */
         pipeline.addLast("httpServerCodec", new HttpServerCodec());
         pipeline.addLast("firstServerHandler", new FirstServerHandler());
