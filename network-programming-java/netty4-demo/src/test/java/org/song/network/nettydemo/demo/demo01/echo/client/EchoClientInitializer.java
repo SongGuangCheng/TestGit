@@ -1,9 +1,8 @@
-package org.song.network.nettydemo.demo.demo01.client;
+package org.song.network.nettydemo.demo.demo01.echo.client;
 
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
-import org.song.network.nettydemo.demo.demo01.server.EchoServerHandler;
 
 /**
  * 定义自定义初始化器, 继承 ChannelInitializer, 其中泛型SocketChannel指的是, 通信传输使用TCP的NIO是SocketChannel, 使用HTTP 是 HttpObject
