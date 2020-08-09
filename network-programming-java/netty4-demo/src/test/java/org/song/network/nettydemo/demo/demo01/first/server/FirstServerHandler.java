@@ -29,6 +29,7 @@ public class FirstServerHandler extends SimpleChannelInboundHandler<HttpObject> 
             FullHttpResponse response = new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.OK, content);
             // 设置HTTP响应header信息
             response.headers().set("content-type", "text/plain");
+            response.headers().set("content-length", content.readableBytes());
             // 写入并刷入到客户端
             ctx.writeAndFlush(response);
         }
