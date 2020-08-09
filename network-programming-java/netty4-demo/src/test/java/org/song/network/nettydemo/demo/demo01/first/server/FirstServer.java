@@ -10,17 +10,25 @@ public class FirstServer {
 
     public static void main(String[] args) throws InterruptedException {
 
+        // 定义两个线程组, 名称自定义
         EventLoopGroup boss = new NioEventLoopGroup();
         EventLoopGroup worker = new NioEventLoopGroup();
 
-        ServerBootstrap bootstrap = new ServerBootstrap();
-        // 使用主从多线程线程模型
-        bootstrap.group(boss, worker)
-                .channel(NioServerSocketChannel.class)
-                .localAddress("localhost", 9999)
-                .childHandler(null);
+        try {
+            ServerBootstrap bootstrap = new ServerBootstrap();
+            // 使用主从多线程线程模型
+            bootstrap.group(boss, worker)
+                    .channel(NioServerSocketChannel.class)
+                    .childHandler(new FirstServerInitializer());
 
-        ChannelFuture channelFuture = bootstrap.bind().sync();
+            ChannelFuture channelFuture = bootstrap.bind(8080).sync();
+            channelFuture.channel().closeFuture().sync();
+
+        } finally {
+            boss.shutdownGracefully();
+            worker.shutdownGracefully();
+        }
+
 
     }
 }
