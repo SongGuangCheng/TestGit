@@ -6,6 +6,9 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 
+/**
+ * 自定义一个简单的 netty实现的 HTTP服务器
+ */
 public class FirstServer {
 
     public static void main(String[] args) throws InterruptedException {
