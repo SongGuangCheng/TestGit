@@ -1,4 +1,4 @@
-package org.song.network.nettydemo.demo.demo01.first.server;
+package org.song.network.nettydemo.demo.demo01.demo_01_http.server;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -18,7 +18,7 @@ public class FirstServerHandler extends SimpleChannelInboundHandler<HttpObject> 
     /**
      * 必须: 重写方法 channelRead0, netty4中的 读取请求方法
      * 在5.0中会重命名为messageReceived消息接收(5.0虽然已经弃用)
-     *
+     * <p>
      * netty实现的Http服务器比较底层, 并没有实现servlet, 很多功能没有实现, 需要自己手动实现,
      * 比如:参数动态绑定, 请求路由, 请求方法区分等
      *
@@ -112,5 +112,28 @@ public class FirstServerHandler extends SimpleChannelInboundHandler<HttpObject> 
         super.channelUnregistered(ctx);
     }
 
+    /**
+     * 连接断开 回调
+     *
+     * @param ctx
+     * @throws Exception
+     */
+    @Override
+    public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("handlerRemoved");
+        super.handlerRemoved(ctx);
+    }
 
+    /**
+     * 出现异常 回调
+     *
+     * @param ctx
+     * @param cause
+     * @throws Exception
+     */
+    @Override
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+        System.out.println("exceptionCaught");
+        super.exceptionCaught(ctx, cause);
+    }
 }

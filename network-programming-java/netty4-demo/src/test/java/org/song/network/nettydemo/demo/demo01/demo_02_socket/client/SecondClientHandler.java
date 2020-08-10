@@ -1,4 +1,4 @@
-package org.song.network.nettydemo.demo.demo01.second.client;
+package org.song.network.nettydemo.demo.demo01.demo_02_socket.client;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;

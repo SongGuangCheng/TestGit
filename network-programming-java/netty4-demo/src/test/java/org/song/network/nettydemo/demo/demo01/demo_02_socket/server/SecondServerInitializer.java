@@ -1,4 +1,4 @@
-package org.song.network.nettydemo.demo.demo01.second.server;
+package org.song.network.nettydemo.demo.demo01.demo_02_socket.server;
 
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
@@ -8,7 +8,7 @@ import io.netty.handler.codec.LengthFieldPrepender;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 import io.netty.util.CharsetUtil;
-import org.song.network.nettydemo.demo.demo01.second.client.SecondClientHandler;
+import org.song.network.nettydemo.demo.demo01.demo_02_socket.client.SecondClientHandler;
 
 
 public class SecondServerInitializer extends ChannelInitializer<SocketChannel> {

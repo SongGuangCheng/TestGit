@@ -1,4 +1,4 @@
-package org.song.network.nettydemo.demo.demo01.first.server;
+package org.song.network.nettydemo.demo.demo01.demo_01_http.server;
 
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
