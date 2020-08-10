@@ -11,6 +11,7 @@ public class ChatServerHandler extends SimpleChannelInboundHandler<String> {
 
     /**
      * netty 提供的 用于保存 channel工具
+     * 继承自Set
      */
     private static ChannelGroup channelGroup = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
 
