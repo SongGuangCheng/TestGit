@@ -19,6 +19,9 @@ public class FirstServerHandler extends SimpleChannelInboundHandler<HttpObject> 
      * 必须: 重写方法 channelRead0, netty4中的 读取请求方法
      * 在5.0中会重命名为messageReceived消息接收(5.0虽然已经弃用)
      *
+     * netty实现的Http服务器比较底层, 并没有实现servlet, 很多功能没有实现, 需要自己手动实现,
+     * 比如:参数动态绑定, 请求路由, 请求方法区分等
+     *
      * @param ctx
      * @param msg
      * @throws Exception
