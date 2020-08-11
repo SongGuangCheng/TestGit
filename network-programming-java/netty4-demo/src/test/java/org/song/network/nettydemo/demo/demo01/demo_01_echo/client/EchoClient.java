@@ -1,4 +1,4 @@
-package org.song.network.nettydemo.demo.demo01.echo.client;
+package org.song.network.nettydemo.demo.demo01.demo_01_echo.client;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;

@@ -1,4 +1,4 @@
-package org.song.network.nettydemo.demo.demo01.echo.server;
+package org.song.network.nettydemo.demo.demo01.demo_01_echo.server;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
