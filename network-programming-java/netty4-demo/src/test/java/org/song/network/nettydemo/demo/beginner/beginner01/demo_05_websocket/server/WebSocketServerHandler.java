@@ -17,7 +17,7 @@ public class WebSocketServerHandler extends SimpleChannelInboundHandler<TextWebS
 
     @Override
     public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
-//        ctx.channel().id
+        ctx.channel().id().asLongText();
     }
 
     @Override
