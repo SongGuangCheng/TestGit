@@ -15,7 +15,7 @@ public class HeartbeatServerInitializer extends ChannelInitializer<SocketChannel
          * 空闲检测 handler, 用于心跳
          * 一定时间内 没有 读, 写, 读或写 则触发事件
          */
-        pipeline.addLast(new IdleStateHandler(3, 3, 5, TimeUnit.SECONDS));
+        pipeline.addLast(new IdleStateHandler(3, 5, 7, TimeUnit.SECONDS));
 
         pipeline.addLast(new HeartbeatServerHandler());
     }

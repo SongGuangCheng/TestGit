@@ -2,6 +2,7 @@ package org.song.network.nettydemo.demo.demo01.demo_04_heartbeat.server;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+import io.netty.handler.timeout.IdleStateEvent;
 
 /**
  * 继承 SimpleChannelInboundHandler
@@ -13,6 +14,26 @@ public class HeartbeatServerHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
 
-        super.userEventTriggered(ctx, evt);
+        if (evt instanceof IdleStateEvent) {
+            // 空下线状态事件
+            IdleStateEvent stateEvent = (IdleStateEvent) evt;
+            String eventType = "";
+            switch (stateEvent.state()) {
+                case READER_IDLE:
+                    // 读空闲
+                    eventType = "读空闲";
+                    break;
+                case WRITER_IDLE:
+                    // 写空闲
+                    eventType = "写空闲";
+                    break;
+                case ALL_IDLE:
+                    // 读写空闲
+                    eventType = "读写空闲";
+                    break;
+            }
+            System.out.println(ctx.channel().remoteAddress() + ": " + eventType);
+        }
+
     }
 }
