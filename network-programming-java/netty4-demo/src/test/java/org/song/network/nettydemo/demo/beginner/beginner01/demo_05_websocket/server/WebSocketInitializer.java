@@ -22,6 +22,6 @@ public class WebSocketInitializer extends ChannelInitializer<SocketChannel> {
         // 处理 WebSocket, 这里的 /ws 是根路径
         pipeline.addLast(new WebSocketServerProtocolHandler("/ws"));
 
-        pipeline.addLast(null);
+        pipeline.addLast(new WebSocketServerHandler());
     }
 }
