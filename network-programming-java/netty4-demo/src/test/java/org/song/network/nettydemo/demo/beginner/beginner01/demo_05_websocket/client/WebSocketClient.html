@@ -4,18 +4,44 @@
     <meta charset="UTF-8">
     <title>WS-Client</title>
     <script type="text/javascript">
-        if(windows.WebSocket){
-            alert("浏览器不支持")
-        }else{
+    var ws;
+        if(window.WebSocket){
+            ws = new WebSocket("ws://localhost:8080/ws");
+            ws.onmessage = function(event){
+                var ta = document.getElementById("responseText");
+                ta.value = ta.value + '\r\n' + event.data;
+            }
+            ws.onopen = function(event){
+                var ta = document.getElementById("responseText");
+                ta.value = '连接开启';
+            }
+            ws.onclose = function(event){
+                var ta = document.getElementById("responseText");
+                ta.value = ta.value + '\r\n连接关闭';
+            }
 
+        }else{
+            alert("浏览器不支持")
         }
+
+        function send(msg){
+            if(!window.WebSocket){
+                return;
+            }
+            if(ws.readyState == WebSocket.OPEN){
+                ws.send(msg);
+            }else{
+                alert('连接未开启');
+            }
+        }
+
 
     </script>
 </head>
 <body>
 <form onsubmit="return false;">
     <textarea name="message" style="width: 400px; height: 200px"></textarea>
-    <input type="button" value="发送数据" onclick=""/>
+    <input type="button" value="发送数据" onclick="send(this.form.message.value)"/>
     <h3>服务器输出:</h3>
     <textarea id="responseText" style="width: 400px; height: 200px"></textarea>
     <input type="button" value="清空" onclick="javascript: document.getElementById('responseText').value=''"/>
