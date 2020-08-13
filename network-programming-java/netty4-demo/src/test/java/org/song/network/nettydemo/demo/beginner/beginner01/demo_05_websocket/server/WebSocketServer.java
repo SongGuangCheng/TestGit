@@ -10,6 +10,7 @@ import io.netty.handler.logging.LoggingHandler;
 
 /**
  * netty 实现简单的 websocket
+ * 可以通过浏览器的控制台等, 查看ws协议升级过程, 以及消息发送帧信息
  */
 public class WebSocketServer {
 
