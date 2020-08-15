@@ -1,4 +1,4 @@
-package org.song.network.nettydemo.demo.beginner.beginner_02_serialize.demo_01_protobuf;
+package org.song.network.nettydemo.demo.beginner.beginner_02_serialize.demo_01_protobuf.protobuf;
 
 import com.google.protobuf.InvalidProtocolBufferException;
 import org.junit.jupiter.api.Test;

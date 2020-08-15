@@ -1,0 +1,26 @@
+package org.song.network.nettydemo.demo.beginner.beginner_02_serialize.demo_01_protobuf.server;
+
+import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.SimpleChannelInboundHandler;
+import org.song.network.nettydemo.demo.beginner.beginner_02_serialize.demo_01_protobuf.protobuf.Data;
+
+import java.util.UUID;
+
+public class ProtobufServerHandler extends SimpleChannelInboundHandler<Data.Student> {
+    @Override
+    protected void channelRead0(ChannelHandlerContext ctx, Data.Student msg) throws Exception {
+        System.out.println("服务端收到消息: " + msg.toString());
+    }
+
+    @Override
+    public void channelActive(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("已连接: " + ctx.channel().remoteAddress());
+        Data.Student student = Data.Student.newBuilder()
+                .setEmail("email")
+                .setName("小六" + UUID.randomUUID().toString().substring(0, 4))
+                .setId(Math.round(10))
+                .build();
+        System.out.println("向客户端发送消息: " + student.toString());
+        ctx.channel().writeAndFlush(student);
+    }
+}

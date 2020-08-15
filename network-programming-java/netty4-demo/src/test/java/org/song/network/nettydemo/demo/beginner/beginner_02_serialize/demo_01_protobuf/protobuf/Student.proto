@@ -2,7 +2,7 @@ syntax = "proto2";
 
 package tutorial;
 
-option java_package = "org.song.network.nettydemo.demo.beginner.beginner_02_serialize.demo_01_protobuf";
+option java_package = "org.song.network.nettydemo.demo.beginner.beginner_02_serialize.demo_01_protobuf.protobuf";
 option java_outer_classname = "Data";
 
 message Student {
