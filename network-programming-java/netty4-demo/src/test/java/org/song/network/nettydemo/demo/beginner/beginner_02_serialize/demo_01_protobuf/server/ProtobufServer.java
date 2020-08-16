@@ -9,7 +9,7 @@ import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 
 /**
- * 使用 netty 实现 protobuf 传输数据
+ * 使用 netty 实现 protobuf 传输数据, 报错
  */
 public class ProtobufServer {
 
