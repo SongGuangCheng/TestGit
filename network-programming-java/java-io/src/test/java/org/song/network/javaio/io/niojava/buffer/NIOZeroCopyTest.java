@@ -2,11 +2,13 @@ package org.song.network.javaio.io.niojava.buffer;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
+import java.nio.channels.FileLock;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 
@@ -82,6 +84,8 @@ public class NIOZeroCopyTest {
 
         // 获取 MappedByteBuffer
         MappedByteBuffer mappedByteBuffer = fileChannel.map(FileChannel.MapMode.READ_WRITE, 0, 5);
+        // 存入(修改文件内容)
+//        mappedByteBuffer.put(0, (byte) 'a');
 
         // linux sendfile 零拷贝方式
         RandomAccessFile writeFile = new RandomAccessFile("xxx.txt", "rw");
@@ -122,6 +126,25 @@ public class NIOZeroCopyTest {
         SocketChannel socketChannel = ServerSocketChannel.open().accept();
         // channel 会向socket同道中依次写入多个缓冲区中的数据
         socketChannel.write(bufferArray);
+    }
+
+    @Test
+    public void file_lock() throws FileNotFoundException {
+        RandomAccessFile randomAccessFile = new RandomAccessFile("", "rw");
+        FileChannel channel = randomAccessFile.getChannel();
+        FileLock lock = null;
+        try {
+            // 文件锁
+            lock = channel.lock();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            try {
+                lock.release();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 

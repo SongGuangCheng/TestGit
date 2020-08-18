@@ -23,4 +23,11 @@ public class ProtobufServerHandler extends SimpleChannelInboundHandler<Data.Stud
         System.out.println("向客户端发送消息: " + student.toString());
         ctx.channel().writeAndFlush(student);
     }
+
+    @Override
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+        System.out.println("发生异常: "+ ctx.channel().remoteAddress());
+        cause.printStackTrace();
+        ctx.channel().close();
+    }
 }

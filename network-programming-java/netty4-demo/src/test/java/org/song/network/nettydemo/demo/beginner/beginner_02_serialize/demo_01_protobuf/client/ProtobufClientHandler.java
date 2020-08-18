@@ -14,6 +14,7 @@ public class ProtobufClientHandler extends SimpleChannelInboundHandler<Data.Stud
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("已连接: " + ctx.channel().remoteAddress());
 //        Data.Student student = Data.Student.newBuilder()
 //                .setEmail("email")
 //                .setName("小六" + UUID.randomUUID().toString().substring(0, 4))
@@ -21,5 +22,12 @@ public class ProtobufClientHandler extends SimpleChannelInboundHandler<Data.Stud
 //                .build();
 //        System.out.println("向服务端发送消息: " + student.toString());
 //        ctx.channel().writeAndFlush(student);
+    }
+
+    @Override
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+        System.out.println("发生异常: "+ ctx.channel().remoteAddress());
+        cause.printStackTrace();
+        ctx.channel().close();
     }
 }
