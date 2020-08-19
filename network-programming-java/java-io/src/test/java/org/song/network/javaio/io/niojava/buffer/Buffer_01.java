@@ -12,13 +12,13 @@ import java.nio.ByteBuffer;
  * @description:
  * @date: 2019年07月09日 13:46:00
  **/
-public class BufferBaseTest {
+public class Buffer_01 {
 
     /**
      * 创建缓冲区方式
      */
     @Test
-    public void bufferInitialized() {
+    public void test_01_init() {
         // 1. 方式1 直接分配大小
         ByteBuffer allocateBuffer = ByteBuffer.allocate(16);
 
@@ -40,7 +40,7 @@ public class BufferBaseTest {
      * Invariants: mark <= position <= limit <= capacity
      */
     @Test
-    public void properties() {
+    public void test_02_properties() {
         ByteBuffer allocateBuffer = ByteBuffer.allocate(16);
         System.out.println("capacity: " + allocateBuffer.capacity());
         System.out.println("limit: " + allocateBuffer.limit());
@@ -54,55 +54,50 @@ public class BufferBaseTest {
      */
     @Test
     public void access1() {
-        ByteBuffer allocateBuffer = ByteBuffer.allocate(8);
+        ByteBuffer buffer = ByteBuffer.allocate(8);
 
-//        print(allocateBuffer);
+//        print(buffer);
 
         /**
          * put() 在position位置, 存入一个元素
          * get() 和 put() 每操作一次, position位置都会后移一次
          */
         byte b = 1;
-        allocateBuffer.put(b);
-        print(allocateBuffer);
+        buffer.put(b);
+        print(buffer);
 
         /**
          * put(array)
          * position会向后移动 array.length 位
          */
 //        byte[] array = new byte[]{1, 2, 3, 4};
-//        allocateBuffer.put(array);
-//        print(allocateBuffer);
+//        buffer.put(array);
+//        print(buffer);
 
         /**
          * put(index, byte)
          * 指定位置放入元素, position 不变
          */
         byte b3 = 3;
-        allocateBuffer.put(5, b3);
-        print(allocateBuffer);
+        buffer.put(5, b3);
+        print(buffer);
 
         /**
          * get() 在position位置, 存入一个元素
          * get() 和 put() 每操作一次, position 位置都会后移一次
          */
-//        byte get = allocateBuffer.get();
-//        print(allocateBuffer);
+//        byte get = buffer.get();
+//        print(buffer);
 //        System.out.println(get);
 
         /**
          * get(index) 获取指定位置的元素, position不变
          */
-        byte b1 = allocateBuffer.get(5);
+        byte b1 = buffer.get(5);
         System.out.println(b1);
-        print(allocateBuffer);
+        print(buffer);
     }
 
-    /**
-     * 打印缓冲区内容
-     *
-     * @param byteBuffer
-     */
     public static void print(ByteBuffer byteBuffer) {
         byte[] hb = byteBuffer.array();
         System.out.println(byteBuffer);
