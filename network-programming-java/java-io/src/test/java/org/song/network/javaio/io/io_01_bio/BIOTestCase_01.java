@@ -1,4 +1,4 @@
-package org.song.network.javaio.io.bio;
+package org.song.network.javaio.io.io_01_bio;
 
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
