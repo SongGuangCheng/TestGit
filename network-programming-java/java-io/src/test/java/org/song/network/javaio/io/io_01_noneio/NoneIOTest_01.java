@@ -10,7 +10,10 @@ import java.nio.ByteBuffer;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 
-public class NIOTestCase_01 {
+/**
+ * 对应 Linux网络编程 五种IO模型中的 NIO, 非阻塞IO
+ */
+public class NoneIOTest_01 {
 
     private static int port = 10001;
 
