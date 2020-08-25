@@ -49,6 +49,10 @@ public class NoneIOTest_01 {
         System.out.println("服务端启动成功！");
         while (true) {
             SocketChannel accept = serverChannel.accept();
+            if (accept == null) {
+                continue;
+            }
+//            System.out.println("连接成功！" + accept.getRemoteAddress());
             // 创建读取的缓冲区
             ByteBuffer buffer = ByteBuffer.allocate(1024);
             int read = accept.read(buffer);
