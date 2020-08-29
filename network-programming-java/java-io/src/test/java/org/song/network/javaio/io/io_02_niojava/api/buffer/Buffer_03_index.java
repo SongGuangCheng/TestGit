@@ -11,24 +11,7 @@ import java.nio.ByteBuffer;
  * @description:
  * @date: 2019年07月09日 13:46:00
  **/
-public class Buffer_01 {
-
-    /**
-     * 创建缓冲区方式
-     */
-    @Test
-    public void test_01_init() {
-        // 1. 方式1 直接分配大小
-        ByteBuffer allocateBuffer = ByteBuffer.allocate(16);
-
-        // 2. 方式2 直接分配大小, 创建直接缓冲区
-        ByteBuffer allocateDirectBuffer = ByteBuffer.allocateDirect(16);
-
-        // 3. 方式3 使用数组初始化 创建缓冲区
-        byte[] array = new byte[]{1, 2, 3, 4};
-        ByteBuffer wrapBuffer = ByteBuffer.wrap(array);
-
-    }
+public class Buffer_03_index {
 
     /**
      * capacity:    缓冲区容量-大小, 也就是数组总长度, 一旦创建不能改变
@@ -39,7 +22,7 @@ public class Buffer_01 {
      * Invariants: mark <= position <= limit <= capacity
      */
     @Test
-    public void test_02_properties() {
+    public void test_01_properties() {
         ByteBuffer allocateBuffer = ByteBuffer.allocate(16);
         System.out.println("capacity" + allocateBuffer.capacity());
         System.out.println("limit" + allocateBuffer.limit());
@@ -48,88 +31,69 @@ public class Buffer_01 {
     }
 
     /**
-     * 缓冲区的使用
-     * 修改和获取缓冲区内容 get() 和 put()
+     * capacity 一已经初始化就不能改变,
+     * 在分配缓冲区的时候, 传入的缓冲区的大小, 最终会赋值给capacity, 同时也是缓冲区底层数组的长度
      */
     @Test
-    public void access_put() {
-        ByteBuffer buffer = ByteBuffer.allocate(8);
-        print("原始数据", buffer);
-
-        /**
-         * put() 在position位置, 存入一个元素
-         * get() 和 put() 每操作一次, position位置都会后移一次
-         *
-         */
-        byte b = 1;
-        buffer.put(b);
-        print("put(byte)", buffer);
-
-        buffer.clear();
-
-        /**
-         * put(array)
-         * 如果是数组, 则position会向后移动 array.length 位
-         */
-        byte[] array = new byte[]{1, 2, 3, 4};
-        buffer.put(array);
-        print("put(byte[])", buffer);
-
-        buffer.clear();
-        /**
-         * put(index, byte)
-         * 指定位置放入元素, position 不变
-         */
-        byte b3 = 3;
-        buffer.put(5, b3);
-        print("put(idx, byte)", buffer);
+    public void test_02_cap() {
+        ByteBuffer allocateBuffer = ByteBuffer.allocate(16);
+        System.out.println("capacity" + allocateBuffer.capacity());
     }
 
+    /**
+     * limit 默认 = capacity, 标示能够操作的索引上限
+     * <p>
+     * 能够修改 limit 值的方法有:
+     * <p>
+     * buffer.limit(idx);// 设置新值
+     * buffer.flip(); // 锁定到position, 锁定到已经从操作的元素
+     * buffer.clear(); // 恢复初始值
+     */
     @Test
-    public void access_get() {
+    public void test_02_lim() {
         ByteBuffer buffer = ByteBuffer.allocate(8);
-        print("原始数据", buffer);
-        /**
-         * get() 和 put() 每操作一次, position 位置都会后移一次
-         */
-        byte get = buffer.get();
-        print("get()", buffer);
-        System.out.println("get() = " + get);
-
+        System.out.println("limit " + buffer.limit());
+        buffer.limit(4);
+        System.out.println("limit(idx), limit " + buffer.limit());
+        buffer.put((byte) 1);
+        buffer.flip();
+        System.out.println("flip(), limit " + buffer.limit());
         buffer.clear();
-
-        /**
-         * get(index) 获取指定位置的元素, position不变
-         */
-        byte b1 = buffer.get(5);
-        System.out.println("get(idx=5) = " + b1);
-        print("get(idx)", buffer);
+        System.out.println("clear(), limit " + buffer.limit());
     }
 
-    public static void print(String name, ByteBuffer byteBuffer) {
-        byte[] hb = byteBuffer.array();
-        System.out.println(name + ": " + byteBuffer);
-        for (int i = 0; i < hb.length; i++) {
+    /**
+     * position 默认值 0, 标示将要操作的相对位置的下标,
+     * 可以修改 position 值的方法有
+     *
+     * buffer.position(index); // 设置新值
+     * buffer.limit(idx); // 当设置的新的 limit <= position 的时候, 由于规定 必须 limit >= potion, 所以会将设置 position = limit
+     * buffer.reset(); // 将设置 position = mark, 但是此时mark的值必须 >= 0
+     * buffer.clear(); // 恢复初始值
+     * buffer.flip(); // 设置 position = 0, 将操作索引调整到开始位置
+     * buffer.rewind(); // 设置 position = 0, 将操作索引调整到开始位置, 在 position 索引下, flip() 和 rewind() 效果相同
+     *
+     * 间接调用方法
+     * nextGetIndex()/nextPutIndex(), position ++, position 向后移动1
+     * 调用其方法有
+     * get(), 获取相对位置元素
+     * put(), 设置相对位置元素
+     *
+     * 间接调用方法
+     * nextGetIndex(int nb)/nextPutIndex(int nb), position += nb, position 向后移动nb
+     * getChar()/putChar(), 获取/设置2个字节元素
+     * getShort()/putShort(), 获取/设置2个字节元素
+     * getFloat()/putFloat(), 获取/设置4个字节元素
+     * getInt()/putInt(), 获取/设置4个字节元素
+     * getLong()/putLong(), 获取/设置8个字节元素
+     * getDouble()/putDouble(), 获取/设置8个字节元素
+     *
+     */
+    @Test
+    public void test_02_position() {
+        ByteBuffer buffer = ByteBuffer.allocate(8);
+        System.out.println("position " + buffer.position());
 
-            StringBuilder sb = new StringBuilder();
-            sb.append(i).append(":").append(hb[i]);
-            if (i == byteBuffer.position()) {
-                sb.append("_pos");
-            }
-            if (byteBuffer.limit() - 1 == i) {
-                sb.append("_lim");
-            }
-            if (byteBuffer.capacity() - 1 == i) {
-                sb.append("_cap");
-            }
-            sb.append("  ");
-            System.out.print(sb.toString());
-        }
-        System.out.println();
-    }
-
-    public static void print(ByteBuffer byteBuffer) {
-        print("", byteBuffer);
     }
 
 
@@ -168,14 +132,6 @@ public class Buffer_01 {
      * 非直接缓冲区：通过 allocate() 方法分配缓冲区，将缓冲区建立在 JVM 的内存中
      * 直接缓冲区：通过 allocateDirect() 方法分配直接缓冲区，将缓冲区建立在物理内存中。可以提高效率
      */
-
-    @Test
-    public void direct() {
-        //分配直接缓冲区
-        ByteBuffer buf = ByteBuffer.allocateDirect(1024);
-
-        System.out.println(buf.isDirect());
-    }
 
     @Test
     public void mark() {

@@ -31,7 +31,7 @@ public class BufferUpgradeTest {
     public void remaining() {
         ByteBuffer byteBuffer = ByteBuffer.allocate(8);
         byteBuffer.put("abcde".getBytes());
-        Buffer_01.print(byteBuffer);
+        BufferUtils.print(byteBuffer);
         /**
          * 是否存在剩余可寻去存取空间
          */
@@ -51,14 +51,14 @@ public class BufferUpgradeTest {
     public void clear() {
         ByteBuffer byteBuffer = ByteBuffer.allocate(8);
         byteBuffer.put("abcdefg".getBytes());
-        Buffer_01.print(byteBuffer);
+        BufferUtils.print(byteBuffer);
         /**
          * position = 0;
          * limit = capacity;
          * mark = -1;
          */
         byteBuffer.clear();
-        Buffer_01.print(byteBuffer);
+        BufferUtils.print(byteBuffer);
     }
 
     /**
@@ -69,14 +69,14 @@ public class BufferUpgradeTest {
     public void rewind() {
         ByteBuffer byteBuffer = ByteBuffer.allocate(8);
         byteBuffer.put("abcdefg".getBytes());
-        Buffer_01.print(byteBuffer);
+        BufferUtils.print(byteBuffer);
         /**
          * 切换读取数据模式,
          * position = 0; position 位置归0, 可以重新头开始 存取数据
          * mark = -1; 清空标记
          */
         byteBuffer.rewind();
-        Buffer_01.print(byteBuffer);
+        BufferUtils.print(byteBuffer);
 
     }
 
@@ -89,7 +89,7 @@ public class BufferUpgradeTest {
     public void flip() {
         ByteBuffer byteBuffer = ByteBuffer.allocate(8);
         byteBuffer.put("abcdefg".getBytes());
-        Buffer_01.print(byteBuffer);
+        BufferUtils.print(byteBuffer);
         /**
          * 切换读取数据模式,
          * limit = position; 存取显示大小改为操作位置大小
@@ -97,6 +97,6 @@ public class BufferUpgradeTest {
          * mark = -1; 清空标记
          */
         byteBuffer.flip();
-        Buffer_01.print(byteBuffer);
+        BufferUtils.print(byteBuffer);
     }
 }
