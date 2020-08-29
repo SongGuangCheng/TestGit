@@ -8,7 +8,6 @@ import java.nio.ByteBuffer;
 /**
  * Buffer 缓冲区 公共父类抽象类
  *
- *
  * @description:
  * @date: 2019年07月09日 13:46:00
  **/
@@ -42,65 +41,74 @@ public class Buffer_01 {
     @Test
     public void test_02_properties() {
         ByteBuffer allocateBuffer = ByteBuffer.allocate(16);
-        System.out.println("capacity: " + allocateBuffer.capacity());
-        System.out.println("limit: " + allocateBuffer.limit());
-        System.out.println("position: " + allocateBuffer.position());
-        System.out.println("mark: " + allocateBuffer.mark());
+        System.out.println("capacity" + allocateBuffer.capacity());
+        System.out.println("limit" + allocateBuffer.limit());
+        System.out.println("position" + allocateBuffer.position());
+        System.out.println("mark" + allocateBuffer.mark());
     }
 
     /**
-     * 缓冲区的使用 存取
-     * get() 和 put()
+     * 缓冲区的使用
+     * 修改和获取缓冲区内容 get() 和 put()
      */
     @Test
-    public void access1() {
+    public void access_put() {
         ByteBuffer buffer = ByteBuffer.allocate(8);
-
-//        print(buffer);
+        print("原始数据", buffer);
 
         /**
          * put() 在position位置, 存入一个元素
          * get() 和 put() 每操作一次, position位置都会后移一次
+         *
          */
         byte b = 1;
         buffer.put(b);
-        print(buffer);
+        print("put(byte)", buffer);
+
+        buffer.clear();
 
         /**
          * put(array)
-         * position会向后移动 array.length 位
+         * 如果是数组, 则position会向后移动 array.length 位
          */
-//        byte[] array = new byte[]{1, 2, 3, 4};
-//        buffer.put(array);
-//        print(buffer);
+        byte[] array = new byte[]{1, 2, 3, 4};
+        buffer.put(array);
+        print("put(byte[])", buffer);
 
+        buffer.clear();
         /**
          * put(index, byte)
          * 指定位置放入元素, position 不变
          */
         byte b3 = 3;
         buffer.put(5, b3);
-        print(buffer);
+        print("put(idx, byte)", buffer);
+    }
 
+    @Test
+    public void access_get() {
+        ByteBuffer buffer = ByteBuffer.allocate(8);
+        print("原始数据", buffer);
         /**
-         * get() 在position位置, 存入一个元素
          * get() 和 put() 每操作一次, position 位置都会后移一次
          */
-//        byte get = buffer.get();
-//        print(buffer);
-//        System.out.println(get);
+        byte get = buffer.get();
+        print("get()", buffer);
+        System.out.println("get() = " + get);
+
+        buffer.clear();
 
         /**
          * get(index) 获取指定位置的元素, position不变
          */
         byte b1 = buffer.get(5);
-        System.out.println(b1);
-        print(buffer);
+        System.out.println("get(idx=5) = " + b1);
+        print("get(idx)", buffer);
     }
 
-    public static void print(ByteBuffer byteBuffer) {
+    public static void print(String name, ByteBuffer byteBuffer) {
         byte[] hb = byteBuffer.array();
-        System.out.println(byteBuffer);
+        System.out.println(name + ": " + byteBuffer);
         for (int i = 0; i < hb.length; i++) {
 
             StringBuilder sb = new StringBuilder();
@@ -114,10 +122,14 @@ public class Buffer_01 {
             if (byteBuffer.capacity() - 1 == i) {
                 sb.append("_cap");
             }
-            sb.append(" ");
+            sb.append("  ");
             System.out.print(sb.toString());
         }
         System.out.println();
+    }
+
+    public static void print(ByteBuffer byteBuffer) {
+        print("", byteBuffer);
     }
 
 
