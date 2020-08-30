@@ -20,6 +20,7 @@ public class Channel_01_base {
      * -   - SelectableChannel 可以被 selector 选择的通道
      * -   -   - GatheringByteChannel 聚集写通道
      * -   -   - ScatteringByteChannel 分散读通道
+     * 主要应用类
      * -   -   -   - FileChannel 文件通道
      * -   -   -   - SocketChannel Socket通道
      * -   -   -   - ServerSocketChannel 服务端Socket通道
