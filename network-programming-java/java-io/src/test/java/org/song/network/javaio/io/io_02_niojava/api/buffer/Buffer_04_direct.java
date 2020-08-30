@@ -13,7 +13,7 @@ import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 
 /**
- * NIO 零拷贝方式
+ * NIO 零拷贝方式, 直接缓冲区
  * 操作系统支持
  * DirectByteBuffer: 直接缓冲区, 堆外内存, 和系统内核缓冲区类似
  * 2. fileChannel.transferTo 和 fileChannel.transferFrom: 调用操作系统的 sendfile
@@ -60,11 +60,8 @@ public class Buffer_04_direct {
      * 通过FileChannel.map() 方法创建
      * <p>
      * 映射字节缓冲区及其表示的文件映射在缓冲区本身被垃圾回收之前保持有效。
-     * <p>
      * 映射字节缓冲区的内容可以随时更改
-     * <p>
      * 映射字节缓冲区的全部或部分可能在任何时候变得无法访问，例如映射文件被截断。 访问映射字节缓冲区的不可访问区域的尝试不会更改缓冲区的内容，并将导致在访问时或稍后的时候抛出未指定的异常。 因此，强烈建议您采取适当的预防措施，以避免该程序或同时运行的程序对映射文件进行操作，但读取或写入文件的内容除外。
-     * <p>
      * 映射的字节缓冲区的行为与普通的直接字节缓冲区不同。
      */
     @Test
@@ -75,6 +72,9 @@ public class Buffer_04_direct {
          */
 //        MappedByteBuffer mappedByteBuffer = Files.map(new File(""));
 
+        /**
+         * 使用方式
+         */
         // linux mmap 零拷贝方式
         // 1.
         // FileChannel fileChannel = FileChannel.open(Paths.get("xxx.txt"), null);
@@ -97,7 +97,7 @@ public class Buffer_04_direct {
     }
 
     /**
-     * 分散
+     * 分散读, 将多个缓冲区内的内容 读到 一个channel中(通常是内存Channel)
      * java 自己实现 将一个缓冲区分散成多个缓冲区, 内部不复制
      */
     @Test
@@ -112,7 +112,7 @@ public class Buffer_04_direct {
     }
 
     /**
-     * 聚集
+     * 聚集写, 将多个缓冲区内容 写入到 同一个channel中(通常是SocketChannel)
      * java 自己实现 将多个缓冲区聚集成一个缓冲区 发送
      *
      * @throws IOException
