@@ -45,4 +45,54 @@ public class Channel_01_base {
 
     }
 
+    /**
+     * 关于读写通道
+     *
+     * ReadableByteChannel 接口, 不能直接使用, 仅仅是定义了行为
+     * 只定义了 读方法
+     * int read(ByteBuffer dst); 将通道中数据读入 缓冲区, 并返回读到的字节数
+     * read: channel -> buffer
+     *
+     * WritableByteChannel 接口, 不能直接使用, 仅仅是定义了行为
+     * 只定义了 写方法
+     * int write(ByteBuffer src); 将缓冲区中的数据写入通道, 并返回写入的字节数
+     * write: buffer -> channel
+     *
+     * read/write 对象都是 channel, 表示从 channel 中读, 和向 channel 中写
+     *
+     *
+     * 异步关闭 和 可中断 通道 InterruptibleChannel
+     * 不可直接使用, 仅仅是定义了方法
+     * close(), 此方法可以使得阻塞在通道上的其他 IO 操作, 中断
+     * 能实现可中断的 IO 操作, 传统的java IO是不可中断的
+     *
+     *
+     * 网络通道
+     *
+     * NetworkChannel 接口
+     * 连接到 Socket 的通道,
+     * 提供的方法
+     * bind(SocketAddress local); 绑定到本地地址
+     * getLocalAddress(); 获取已绑定的地址
+     * setOption(SocketOption<T> name, T value); 设置 Socket 选项
+     * getOption(SocketOption<T> name); 获取 Socket 选项
+     * supportedOptions(); 获取支持的选项
+     *
+     * ServerSocketChannel 抽象类
+     * 服务端的 Socket 通道, 用于表示一个服务端的 socket 连接
+     * 包含方法
+     * open(); 新建一个通道
+     * bind(); 绑定本地地址
+     * getLocalAddress(); 获取本地地址
+     * validOps(); 返回可操作的事件集合
+     * setOption(); 设置 Socket 选项
+     * socket(); 返回与此关联的 ServerSocket
+     * accept(); 返回此通道上的连接事件, ServerSocketChannel 上的 SocketChannel
+     *
+     */
+    @Test
+    public void test_02_structure02() {
+
+    }
+
 }
