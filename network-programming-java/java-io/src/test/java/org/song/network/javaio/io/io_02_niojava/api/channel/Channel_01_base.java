@@ -2,20 +2,6 @@ package org.song.network.javaio.io.io_02_niojava.api.channel;
 
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.RandomAccessFile;
-import java.net.SocketAddress;
-import java.net.URI;
-import java.nio.channels.FileChannel;
-import java.nio.channels.SocketChannel;
-import java.nio.file.OpenOption;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
-import java.util.HashSet;
-import java.util.Set;
-
 public class Channel_01_base {
 
     /**
@@ -47,28 +33,44 @@ public class Channel_01_base {
 
     /**
      * 关于读写通道
-     *
+     * <p>
      * ReadableByteChannel 接口, 不能直接使用, 仅仅是定义了行为
      * 只定义了 读方法
      * int read(ByteBuffer dst); 将通道中数据读入 缓冲区, 并返回读到的字节数
      * read: channel -> buffer
-     *
      * WritableByteChannel 接口, 不能直接使用, 仅仅是定义了行为
      * 只定义了 写方法
      * int write(ByteBuffer src); 将缓冲区中的数据写入通道, 并返回写入的字节数
      * write: buffer -> channel
-     *
      * read/write 对象都是 channel, 表示从 channel 中读, 和向 channel 中写
-     *
-     *
+     * <p>
+     * <p>
      * 异步关闭 和 可中断 通道 InterruptibleChannel
      * 不可直接使用, 仅仅是定义了方法
      * close(), 此方法可以使得阻塞在通道上的其他 IO 操作, 中断
      * 能实现可中断的 IO 操作, 传统的java IO是不可中断的
-     *
-     *
+     * <p>
+     * <p>
+     * 文件通道
+     * FileChannel 抽象类
+     * 连接到 文件 的通道
+     * 包含方法
+     * open(); 打开一个文件通道
+     * read(); 从通道中读取数据
+     * write(); 将数据写入到通道中
+     * position(); 返回通道文件的 操作索引, 或设置通道文件的 操作索引
+     * size(); 文件字节数
+     * truncate()
+     * force()
+     * transferTo(); 将本文件通道中的数据直接发送到目标通道中
+     * transferFrom(); 从目标通道中直接读取数据
+     * map(); 创建一个内存映射文件 MappedByteBuffer
+     * lock(); 给通道中指定的文件区域上锁,
+     * tryLock();
+     * <p>
+     * <p>
      * 网络通道
-     *
+     * <p>
      * NetworkChannel 接口
      * 连接到 Socket 的通道,
      * 提供的方法
@@ -77,7 +79,7 @@ public class Channel_01_base {
      * setOption(SocketOption<T> name, T value); 设置 Socket 选项
      * getOption(SocketOption<T> name); 获取 Socket 选项
      * supportedOptions(); 获取支持的选项
-     *
+     * <p>
      * ServerSocketChannel 抽象类
      * 服务端的 Socket 通道, 用于表示一个服务端的 socket 连接
      * 包含方法
@@ -88,9 +90,27 @@ public class Channel_01_base {
      * setOption(); 设置 Socket 选项
      * socket(); 返回与此关联的 ServerSocket
      * accept(); 返回此通道上的连接事件, ServerSocketChannel 上的 SocketChannel
-     *
+     * <p>
+     * SocketChannel 抽象类
+     * 客户端 Socket 通道, 表示一个客户端的 Socket 连接
+     * 包含方法
+     * open(); 新建一个通道
+     * bind(); 绑定本地地址
+     * setOption(); 设置 socket 选项
+     * shutdownInput(); 关闭输入流, 但是不关闭连接
+     * shutdownOutput(); 关闭输出流, 但是不关闭连接
+     * socket(); 返回与此关联的 SocketChannel
+     * isConnected(); 返回是否已连接
+     * isConnectionPending(); 连接是否正在进行
+     * connect(); 开始连接
+     * finishConnect();
+     * getRemoteAddress(); 获取远程地址
+     * getLocalAddress(); 获取本地地址
+     * read(); 从通道中读取数据
+     * write(); 将数据写入到通道中
      */
     @Test
+
     public void test_02_structure02() {
 
     }
