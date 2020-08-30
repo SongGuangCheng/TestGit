@@ -41,6 +41,8 @@ public class Buffer_01_base {
         ByteBuffer allocateDirectBuffer = ByteBuffer.allocateDirect(16);
 
         // 3. 方式3 使用数组初始化 创建缓冲区
+        // wrap方法会包裹一个数组: 一般这种用法不会先初始化缓存对象的长度，因为没有意义，最后还会被wrap所包裹的数组覆盖掉。
+        // 并且wrap方法修改缓冲区对象的时候，数组本身也会跟着发生变化
         byte[] array = new byte[]{1, 2, 3, 4};
         ByteBuffer wrapBuffer = ByteBuffer.wrap(array);
 

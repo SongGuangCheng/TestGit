@@ -216,6 +216,8 @@ public class Buffer_03_index {
      * array(), 返回数组
      * <p>
      * isDirect(), 是否是直接缓冲区,
+     *
+     * buffer.duplicate(), 复制一个缓冲区,
      */
     @Test
     public void test_04_other() {
@@ -228,6 +230,9 @@ public class Buffer_03_index {
         System.out.println(buffer.array());
 
         System.out.println(buffer.isDirect());
+
+        ByteBuffer duplicate = buffer.duplicate();
+
 
     }
 }

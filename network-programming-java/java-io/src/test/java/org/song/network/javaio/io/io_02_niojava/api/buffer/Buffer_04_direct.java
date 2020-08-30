@@ -22,7 +22,7 @@ import java.nio.channels.SocketChannel;
  * java优化
  * 1. scattering 和 gathering: 缓冲区的分散和聚集
  */
-public class NIOZeroCopyTest {
+public class Buffer_04_direct {
 
 
     /**
