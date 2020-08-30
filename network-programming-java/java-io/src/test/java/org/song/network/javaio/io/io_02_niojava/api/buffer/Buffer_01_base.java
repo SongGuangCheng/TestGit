@@ -30,6 +30,21 @@ public class Buffer_01_base {
     }
 
     /**
+     * Buffer 抽象类
+     * -    - ByteBuffer: 省略其他基本类型(ShortBuffer/CharBuffer/FloatBuffer/IntBuffer/DoubleBuffer/LongBuffer)
+     * -    -   - HeapByteBuffer: 堆内存缓冲区
+     * -    -   -   - HeapByteBufferR: 只读 堆内存缓冲区
+     * DirectBuffer 接口, 直接内存缓冲区
+     * -    -   - MappedByteBuffer: 内存映射文件 缓冲区
+     * -    -   -   - DirectByteBuffer: 直接内存缓冲区
+     * -    -   -   -   - DirectByteBufferR: 只读 直接内存缓冲区
+     */
+    @Test
+    public void test_01_structure(){
+
+    }
+
+    /**
      * 创建缓冲区方式
      */
     @Test

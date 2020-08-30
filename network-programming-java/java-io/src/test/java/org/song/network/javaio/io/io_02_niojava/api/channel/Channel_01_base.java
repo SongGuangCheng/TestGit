@@ -65,8 +65,8 @@ public class Channel_01_base {
      * transferTo(); 将本文件通道中的数据直接发送到目标通道中
      * transferFrom(); 从目标通道中直接读取数据
      * map(); 创建一个内存映射文件 MappedByteBuffer
-     * lock(); 给通道中指定的文件区域上锁,
-     * tryLock();
+     * lock(); 给通道中指定的文件区域上锁, 或者整个通道上锁
+     * tryLock(); 尝试获取通道中指定文件区域的锁, 或者整个通道的锁
      * <p>
      * <p>
      * 网络通道
