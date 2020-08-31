@@ -26,6 +26,7 @@ public class Channel_01_getter_scatter {
         FileChannel fileChannel = FileChannel.open(Paths.get("file\\test.txt"),
                 StandardOpenOption.CREATE, StandardOpenOption.READ, StandardOpenOption.WRITE);
 
+        // FileChannel 继承 GatheringByteChannel, 所以支持聚集写
         // 将多个 buffer 数据写入一个 channel, 顺序按照目标数组下标顺序
         fileChannel.write(new ByteBuffer[]{buffer1, buffer2});
         fileChannel.close();
@@ -47,6 +48,7 @@ public class Channel_01_getter_scatter {
         FileChannel fileChannel = FileChannel.open(Paths.get("file\\test.txt"),
                 StandardOpenOption.CREATE, StandardOpenOption.READ, StandardOpenOption.WRITE);
 
+        // FileChannel 继承 ScatteringByteChannel, 所以支持分散读
         // 将 channel 中数组分别 读取到多个 buffer 中, 按照 buffer 数组下标顺序, 满了之后下一个
         fileChannel.read(new ByteBuffer[]{buffer1, buffer2});
         System.out.println("buffer1: " + new String(buffer1.array()));
