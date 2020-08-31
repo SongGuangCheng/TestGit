@@ -31,13 +31,13 @@ public class Buffer_01_base {
 
     /**
      * Buffer 抽象类
-     * -    - ByteBuffer: 省略其他基本类型(ShortBuffer/CharBuffer/FloatBuffer/IntBuffer/DoubleBuffer/LongBuffer)
-     * -    -   - HeapByteBuffer: 堆内存缓冲区
-     * -    -   -   - HeapByteBufferR: 只读 堆内存缓冲区
+     * -    - ByteBuffer:               省略其他基本类型(ShortBuffer/CharBuffer/FloatBuffer/IntBuffer/DoubleBuffer/LongBuffer)
+     * -    -   - HeapByteBuffer:       堆内存缓冲区
+     * -    -   -   - HeapByteBufferR:  只读 堆内存缓冲区
      * DirectBuffer 接口, 直接内存缓冲区
-     * -    -   - MappedByteBuffer: 内存映射文件 缓冲区
-     * -    -   -   - DirectByteBuffer: 直接内存缓冲区
-     * -    -   -   -   - DirectByteBufferR: 只读 直接内存缓冲区
+     * -    -   - MappedByteBuffer:             内存映射文件 缓冲区
+     * -    -   -   - DirectByteBuffer:         直接内存缓冲区
+     * -    -   -   -   - DirectByteBufferR:    只读 直接内存缓冲区
      */
     @Test
     public void test_01_structure(){
@@ -56,8 +56,7 @@ public class Buffer_01_base {
         ByteBuffer allocateDirectBuffer = ByteBuffer.allocateDirect(16);
 
         // 3. 方式3 使用数组初始化 创建缓冲区
-        // wrap方法会包裹一个数组: 一般这种用法不会先初始化缓存对象的长度，因为没有意义，最后还会被wrap所包裹的数组覆盖掉。
-        // 并且wrap方法修改缓冲区对象的时候，数组本身也会跟着发生变化
+        // 注意: wrap方法修改缓冲区对象的时候，数组本身也会跟着发生变化, 他们拥有同一个数组对象
         byte[] array = new byte[]{1, 2, 3, 4};
         ByteBuffer wrapBuffer = ByteBuffer.wrap(array);
 

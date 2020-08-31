@@ -11,24 +11,7 @@ import java.nio.ByteBuffer;
  * @description:
  * @date: 2019年07月09日 13:46:00
  **/
-public class Buffer_02_access {
-
-    /**
-     * capacity:    缓冲区容量-大小, 也就是数组总长度, 一旦创建不能改变
-     * limit:       缓冲区限制-大小, 可以存取数据的大小
-     * position:    当前读取位置-下标,
-     * mark:        标记-下标
-     * <p>
-     * Invariants: mark <= position <= limit <= capacity
-     */
-    @Test
-    public void test_02_properties() {
-        ByteBuffer allocateBuffer = ByteBuffer.allocate(16);
-        System.out.println("capacity" + allocateBuffer.capacity());
-        System.out.println("limit" + allocateBuffer.limit());
-        System.out.println("position" + allocateBuffer.position());
-        System.out.println("mark" + allocateBuffer.mark());
-    }
+public class Buffer_03_access {
 
     /**
      * 缓冲区的使用

@@ -11,7 +11,7 @@ import java.nio.ByteBuffer;
  * @description:
  * @date: 2019年07月09日 13:46:00
  **/
-public class Buffer_03_index {
+public class Buffer_02_index {
 
     /**
      * capacity:    缓冲区容量-大小, 也就是数组总长度, 一旦创建不能改变
@@ -31,7 +31,7 @@ public class Buffer_03_index {
     }
 
     /**
-     * capacity 一已经初始化就不能改变,
+     * capacity 一经初始化就不能改变,
      * 在分配缓冲区的时候, 传入的缓冲区的大小, 最终会赋值给capacity, 同时也是缓冲区底层数组的长度
      * <p>
      * 获取 capacity 的方法
@@ -135,11 +135,11 @@ public class Buffer_03_index {
     /**
      * mark 默认值 -1, 用于临时标记下标
      * 可以修改mark的值的方法
-     * buffer.mark(); // 打标记, 将赋值 mark = position
-     * buffer.limit(idx);// 设置新limit时, 如果 mark > limit, 则将 mark 重置为 -1
+     * buffer.mark();           // 打标记, 将赋值 mark = position
+     * buffer.limit(idx);       // 设置新limit时, 如果 mark > limit, 则将 mark 重置为 -1
      * buffer.clear();          // 恢复初始值 -1
-     * buffer.flip();          // 删除标记 -1
-     * buffer.rewind()();          // 删除标记 -1
+     * buffer.flip();           // 删除标记 -1
+     * buffer.rewind();         // 删除标记 -1
      */
     @Test
     public void test_02_mark() {
