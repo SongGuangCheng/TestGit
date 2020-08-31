@@ -1,6 +1,7 @@
 package org.song.network.javaio.io.io_02_niojava.api.channel;
 
 import org.junit.jupiter.api.Test;
+import org.song.network.javaio.io.io_02_niojava.api.buffer.BufferUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -116,8 +117,8 @@ public class Channel_02_file {
 
         ByteBuffer byteBuffer03 = ByteBuffer.allocate(16);
         ByteBuffer byteBuffer04 = ByteBuffer.allocate(16);
-        // 3. 将 FileChannel 中数据, 分散读到多个 buffer中, 后面两个参数啥意思?
-        fileChannel.read(new ByteBuffer[]{byteBuffer03, byteBuffer04}, 0, 2);
+        // 3. 将 FileChannel 中数据, 分散读到多个 buffer中
+        fileChannel.read(new ByteBuffer[]{byteBuffer03, byteBuffer04} );
         byteBuffer03.flip();
         System.out.println("read(ByteBuffer[], offset, len): " + new String(byteBuffer03.array()));
         byteBuffer04.flip();
@@ -127,12 +128,21 @@ public class Channel_02_file {
 
     /**
      * FileChannel 的写操作
+     * 写入操作为啥不好使 ?
      */
     @Test
     public void test_03_write() throws IOException {
 
         FileChannel fileChannel = FileChannel.open(Paths.get("file\\FileChannelTest.txt"),
                 StandardOpenOption.CREATE, StandardOpenOption.READ, StandardOpenOption.WRITE);
+
+        ByteBuffer byteBuffer = ByteBuffer.wrap("ffff".getBytes());
+        byteBuffer.flip();
+        while (byteBuffer.hasRemaining()) {
+            fileChannel.write(byteBuffer);
+        }
+        fileChannel.force(true);
+        fileChannel.close();
     }
 
 }
