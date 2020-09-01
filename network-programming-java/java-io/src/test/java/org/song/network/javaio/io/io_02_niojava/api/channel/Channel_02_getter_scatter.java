@@ -8,7 +8,7 @@ import java.nio.channels.FileChannel;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 
-public class Channel_01_getter_scatter {
+public class Channel_02_getter_scatter {
 
     /**
      * 聚集写: 多个 buffer 写入 一个 channel
