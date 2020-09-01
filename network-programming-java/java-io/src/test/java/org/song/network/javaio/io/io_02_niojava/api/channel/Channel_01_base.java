@@ -116,4 +116,38 @@ public class Channel_01_base {
 
     }
 
+    /**
+     * FileChannel 文件通道
+     *
+     * 继承 ReadableByteChannel, WritableByteChannel,     实现可读可写功能
+     * 继承 InterruptibleChannel,                         实现中断和异步关闭功能
+     * 继承 GatheringByteChannel, ScatteringByteChannel,  实现聚集写和分散读的功能
+     * 继承 SeekableByteChannel,                          实现读取指定位置字节的功能(FileChannel 特有)
+     *
+     */
+    @Test
+    public void test_02_file_structure() {
+
+    }
+
+    /**
+     * SocketChannel 和 ServerSocketChannel, 套接字(网络)通道
+     *
+     * SocketChannel 客户端套接字通道
+     * 继承 ReadableByteChannel, WritableByteChannel,     实现可读可写功能
+     * 继承 InterruptibleChannel,                         实现中断和异步关闭功能
+     * 继承 GatheringByteChannel, ScatteringByteChannel,  实现聚集写和分散读的功能
+     * 继承 NetworkChannel,                               实现可连接到网络的功能(套接字 特有)
+     * 继承 SelectableChannel,                            实现通道可以被Selector选择的功能(套接字 特有)
+     *
+     * ServerSocketChannel 服务端套接字通道
+     * 继承 InterruptibleChannel,                         实现中断和异步关闭功能
+     * 继承 NetworkChannel,                               实现可连接到网络的功能(套接字 特有)
+     * 继承 SelectableChannel,                            实现通道可以被Selector选择的功能(套接字 特有)
+     */
+    @Test
+    public void test_02_socket_structure() {
+
+    }
+
 }
