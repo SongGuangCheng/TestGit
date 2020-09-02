@@ -47,4 +47,21 @@ public class Socket_01_structure {
 
     }
 
+    /**
+     * 结构
+     *
+     * Socket 服务端套接字 类
+     *
+     * Socket 结构和 ServerSocket 类似
+     *
+     * 除了 Socket 类和 ServerSocket 类本身不相同,
+     * 都包含一个 SocketImpl 的引用 (默认是 SocksSocketImpl)
+     */
+    @Test
+    public void test_01_Socket_structure() {
+
+    }
+
+
+
 }

@@ -35,9 +35,10 @@ public class BioDemo_01_Base {
     @Test
     public void client() throws IOException, InterruptedException {
         // 目标IP和端口(注意: 客户端IP是当前地址IP, 客户端端口是随机端口)
-        Socket socket = new Socket(ip, port);
+//        Socket socket = new Socket(ip, port);
+        Socket socket = new Socket();
         // 可以手动指定客户端端口
-//        socket.bind(new InetSocketAddress(60428));
+        socket.connect(new InetSocketAddress(port));
 
         PrintWriter writer = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()), true);
         writer.println("client : 我发消息了");
