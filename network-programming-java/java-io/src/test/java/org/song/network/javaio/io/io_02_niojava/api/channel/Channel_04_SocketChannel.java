@@ -78,6 +78,7 @@ public class Channel_04_SocketChannel {
         ByteBuffer writeBuffer = ByteBuffer.wrap("hello server".getBytes());
         socketChannel.write(writeBuffer);
 
+        // 由于是非阻塞, 所以 read的时候不会阻塞, 可能会读取不到数据
         ByteBuffer readBuffer = ByteBuffer.allocate(1024);
         socketChannel.read(readBuffer);
 
