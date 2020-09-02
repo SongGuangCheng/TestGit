@@ -133,7 +133,8 @@ public class Channel_03_socket {
     public void test_02_server_init() throws IOException {
         // 1. 打开一个通道
         ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
-        serverSocketChannel.socket().bind(new InetSocketAddress(1000));
+        ServerSocket serverSocket = serverSocketChannel.socket();
+        serverSocket.bind(new InetSocketAddress(1000));
         // serverSocketChannel.bind(new InetSocketAddress(1000));
 
         // 2. 设置阻塞模式
