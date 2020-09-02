@@ -13,10 +13,11 @@ public class Socket_01_structure {
      * SocketOptions        接口
      * -    - SocketImpl    抽象类
      * -    -   - AbstractPlainSocketImpl   抽象类
-     * -    -   -   - PlainSocketImpl       类
+     * -    -   -   - DualStackPlainSocketImpl       类
+     * -    -   -   - PlainSocketImpl       类 (包含一个 AbstractPlainSocketImpl 引用 默认是 DualStackPlainSocketImpl 实例, TwoStacksPlainSocketImpl)
      * -    -   -   -   - SocksSocketImpl   类
      *
-     * ServerSocket 包含一个 SocketImpl 的引用
+     * ServerSocket 包含一个 SocketImpl 的引用 (默认是 SocksSocketImpl)
      * SocketImpl 也包含这个 ServerSocket 的引用
      *
      * 详解
@@ -45,4 +46,5 @@ public class Socket_01_structure {
     public void test_01_ServerSocket_structure() {
 
     }
+
 }
