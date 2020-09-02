@@ -10,7 +10,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 
-public class Channel_04_socket_demo {
+public class Channel_04_SocketChannel {
 
     /**
      * 简单的 SocketChannel 和 ServerSocketChannel 通信
