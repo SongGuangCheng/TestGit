@@ -120,9 +120,7 @@ public class Channel_04_SocketChannel {
      * 的
      * socketChannel.socket().connect() 和 socketChannel.connect()
      * 在建立连接方法上是一样的, 都是调用 SocketChannelImpl.connect()
-     * 区别在于
-     * Socket 使用流的方式进行数据传输
-     * SocketChannel 使用通道缓冲区的方式进行数据传输
+     *
      */
     @Test
     public void test_03_SocketChannel() throws IOException {
@@ -150,13 +148,6 @@ public class Channel_04_SocketChannel {
      * 的
      * serverSocketChannel.socket() 和 serverSocketChannel.bind
      * 在绑定端口方法上是相同的, 都是 ServerSocketChannelImpl.bind()
-     * 区别在于
-     * 1.
-     * ServerSocket.accept() 属于 OIO 阻塞方式,
-     * serverSocketChannel.accept() 属于 NIO 非阻塞方式
-     * 2.
-     * ServerSocket.accept() 返回 ServerSocket 使用流进行数据传输
-     * serverSocketChannel.accept() 返回 SocketChannel 使用通道缓冲区进行数据传输
      */
     @Test
     public void test_03_ServerSocketChannel() throws IOException {
