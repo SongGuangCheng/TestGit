@@ -74,6 +74,8 @@ public class Channel_03_SocketChannel_01_Structure02 {
      * Socket 中的输出流是 SocketOutputStream
      * SocketAdapter 中的输入流是 SocketAdaptor.SocketInputStream 内部类
      * SocketAdapter 中的输入流是 OutputStream 匿名内部类, Channels 由工厂类生成
+     *
+     * Channels 主要提供了 流 和 通道 互转的工具方法
      */
     @Test
     public void test_02_SocketChannel_Stream() {
