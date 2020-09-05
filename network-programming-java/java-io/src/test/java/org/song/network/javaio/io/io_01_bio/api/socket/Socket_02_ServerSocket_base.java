@@ -2,7 +2,7 @@ package org.song.network.javaio.io.io_01_bio.api.socket;
 
 import org.junit.jupiter.api.Test;
 
-public class Socket_02_ServerSocket_InvokeChain {
+public class Socket_02_ServerSocket_base {
 
     /**
      * 结构
