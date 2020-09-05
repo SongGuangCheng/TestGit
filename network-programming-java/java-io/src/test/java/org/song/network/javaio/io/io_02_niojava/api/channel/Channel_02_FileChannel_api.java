@@ -17,7 +17,7 @@ import java.nio.file.StandardOpenOption;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Channel_02_FileChannel {
+public class Channel_02_FileChannel_api {
 
     /**
      * FileChannel 通道

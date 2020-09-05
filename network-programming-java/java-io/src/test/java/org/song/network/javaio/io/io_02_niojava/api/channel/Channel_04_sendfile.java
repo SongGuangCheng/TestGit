@@ -10,7 +10,7 @@ import java.nio.channels.SocketChannel;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 
-public class Channel_05_sendfile {
+public class Channel_04_sendfile {
 
     /**
      * FileChannel 通道

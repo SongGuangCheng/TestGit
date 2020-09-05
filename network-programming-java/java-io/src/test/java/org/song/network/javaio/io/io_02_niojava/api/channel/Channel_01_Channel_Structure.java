@@ -2,7 +2,7 @@ package org.song.network.javaio.io.io_02_niojava.api.channel;
 
 import org.junit.jupiter.api.Test;
 
-public class Channel_01_base {
+public class Channel_01_Channel_Structure {
 
     /**
      * Channel 通道

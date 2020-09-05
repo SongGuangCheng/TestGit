@@ -8,7 +8,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 
-public class Channel_04_socket_gather_scatter {
+public class Channel_03_SocketChannel_03_gather_scatter {
 
     /**
      * SocketChannel
