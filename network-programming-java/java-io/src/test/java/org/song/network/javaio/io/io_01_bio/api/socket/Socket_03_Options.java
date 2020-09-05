@@ -2,6 +2,8 @@ package org.song.network.javaio.io.io_01_bio.api.socket;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
 
@@ -9,7 +11,7 @@ public class Socket_03_Options {
 
     /**
      * SocketOptions 接口, 定义了 java 支持的所有 Socket 选项,
-     * -    - SocketImpl 抽象列, 提供了 Socket 和 ServerSocket 的 Socket 选项支持
+     * -    - SocketImpl 抽象类, 提供了 Socket 和 ServerSocket 的 Socket 选项支持
      * <p>
      * SocketImpl 支持的 Socket 选项
      * <p>
@@ -93,5 +95,24 @@ public class Socket_03_Options {
         socket.setOOBInline(true);
         socket.getOOBInline();
 
+    }
+
+    /**
+     *
+     * 和客户端 Socket 相比, ServerSocket 支持的修改 Socket 选项比较少
+     *
+     */
+    @Test
+    public void test_02_ServerSocket() throws IOException {
+        ServerSocket serverSocket = new ServerSocket();
+
+        serverSocket.setReuseAddress(true);
+        serverSocket.getReuseAddress();
+
+        serverSocket.setReceiveBufferSize(1);
+        serverSocket.getReceiveBufferSize();
+
+        serverSocket.setSoTimeout(1);
+        serverSocket.getSoTimeout();
     }
 }
