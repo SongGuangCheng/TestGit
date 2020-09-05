@@ -9,7 +9,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 
-public class Channel_03_SocketChannel_01_Structure {
+public class Channel_03_SocketChannel_01_Structure01 {
 
     /**
      * SocketChannel 和 ServerSocketChannel 都是套接字通道, 分别用于客户端和服务端
