@@ -19,7 +19,7 @@ public class Channel_02_FileChannel_gather_scatter {
      *
      */
     @Test
-    public void test_01_gether() throws IOException {
+    public void test_01_gather() throws IOException {
         ByteBuffer buffer1 = ByteBuffer.wrap("aaaa".getBytes());
         ByteBuffer buffer2 = ByteBuffer.wrap("1111".getBytes());
 

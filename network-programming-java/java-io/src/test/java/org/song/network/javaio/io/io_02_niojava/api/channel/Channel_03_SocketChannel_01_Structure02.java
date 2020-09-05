@@ -66,4 +66,18 @@ public class Channel_03_SocketChannel_01_Structure02 {
 
     }
 
+    /**
+     * Socket               OIO 中的 Socket
+     * -    - SocketAdapter NIO 中的 Socket
+     *
+     * Socket 中的输入流是 SocketInputStream
+     * Socket 中的输出流是 SocketOutputStream
+     * SocketAdapter 中的输入流是 SocketAdaptor.SocketInputStream 内部类
+     * SocketAdapter 中的输入流是 OutputStream 匿名内部类, Channels 由工厂类生成
+     */
+    @Test
+    public void test_02_SocketChannel_Stream() {
+
+    }
+
 }

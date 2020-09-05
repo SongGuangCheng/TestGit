@@ -90,7 +90,8 @@ public class BioDemo_01_Base {
         System.out.println("Server: 收到新连接 " + socket.getInetAddress().toString());
 
         // 获取 输入流 输出流
-        BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        InputStream inputStream = socket.getInputStream();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
 //        PrintWriter writer = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()), true);
 //        writer.println("Server response: hello !");
 //        writer.println("end");
