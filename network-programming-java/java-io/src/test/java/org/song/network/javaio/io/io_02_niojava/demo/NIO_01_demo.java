@@ -9,34 +9,30 @@ import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Iterator;
-import java.util.Set;
+import java.util.Scanner;
 
 public class NIO_01_demo {
 
     private int port = 10000;
 
     @Test
-    public void client() {
-
+    public void client_01_NIO_Once() {
         try {
             SocketChannel socketChannel = SocketChannel.open();
-            socketChannel.configureBlocking(false);
+//            socketChannel.configureBlocking(false);
             socketChannel.connect(new InetSocketAddress(port));
             socketChannel.finishConnect();
             System.out.println("已连接");
 
-            socketChannel.write(ByteBuffer.wrap("hello".getBytes()));
-            socketChannel.write(ByteBuffer.wrap("end".getBytes()));
-            while (true) {
-                ByteBuffer byteBuffer = ByteBuffer.allocate(64);
-                socketChannel.read(byteBuffer);
-                String res = new String(byteBuffer.array());
-                System.out.println("收到服务端信息" + res);
-                if ("end".equals(res)) {
-                    break;
-                }
-            }
+            ByteBuffer buf = ByteBuffer.allocate(1024);
+            Scanner scan = new Scanner(System.in);
+
+            socketChannel.write(ByteBuffer.wrap((LocalTime.now() + ": hello!").getBytes()));
+            socketChannel.read(buf);
+            System.out.println(new String(buf.array()));
             socketChannel.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -44,7 +40,32 @@ public class NIO_01_demo {
     }
 
     @Test
-    public void server() {
+    public void client_01_NIO_SystemIN() {
+        try {
+            SocketChannel socketChannel = SocketChannel.open();
+            socketChannel.configureBlocking(false);
+            socketChannel.connect(new InetSocketAddress(port));
+            socketChannel.finishConnect();
+            System.out.println("已连接");
+
+            ByteBuffer buf = ByteBuffer.allocate(1024);
+            Scanner scan = new Scanner(System.in);
+
+            while (scan.hasNext()) {
+                buf.put((LocalTime.now() + "\n" + scan.next()).getBytes());
+                buf.flip();
+                socketChannel.write(buf);
+                buf.clear();
+            }
+
+            socketChannel.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void server_01_NIO() {
 
         try {
             Selector selector = Selector.open();
@@ -57,28 +78,36 @@ public class NIO_01_demo {
             while (true) {
                 selector.select();
 
-                Iterator<SelectionKey> keyIterator = selector.keys().iterator();
+                Iterator<SelectionKey> keyIterator = selector.selectedKeys().iterator();
                 while (keyIterator.hasNext()) {
                     SelectionKey selectionKey = keyIterator.next();
+                    keyIterator.remove();
                     if (!selectionKey.isValid()) {
-                        keyIterator.remove();
                         continue;
                     }
                     if (selectionKey.isAcceptable()) {
-
+                        ServerSocketChannel ssc = (ServerSocketChannel) selectionKey.channel();
+                        SocketChannel sc = ssc.accept();
+                        sc.configureBlocking(false);
+                        System.out.println(LocalTime.now() + ": 已连接 " + sc.getLocalAddress().toString());
+                        sc.register(selector, SelectionKey.OP_READ);
                     }
                     if (selectionKey.isReadable()) {
+                        SocketChannel socketChannel = (SocketChannel) selectionKey.channel();
+                        ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
+                        socketChannel.read(byteBuffer);
+                        System.out.println(LocalTime.now() + ": 收到数据 " + new String(byteBuffer.array()));
 
+                        socketChannel.register(selector, SelectionKey.OP_WRITE);
                     }
                     if (selectionKey.isWritable()) {
-
+                        SocketChannel channel = (SocketChannel) selectionKey.channel();
+                        channel.write(ByteBuffer.wrap(("response: " + LocalDateTime.now()).getBytes()));
                     }
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
 }

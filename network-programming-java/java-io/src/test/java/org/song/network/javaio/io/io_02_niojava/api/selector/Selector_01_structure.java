@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.nio.channels.spi.SelectorProvider;
 
-public class Selector_01_structure_01_Selector {
+public class Selector_01_structure {
 
     /**
      * Selector 抽象类

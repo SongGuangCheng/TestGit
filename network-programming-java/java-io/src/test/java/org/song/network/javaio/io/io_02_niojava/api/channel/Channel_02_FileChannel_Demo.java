@@ -1,4 +1,4 @@
-package org.song.network.javaio.io.io_fileio;
+package org.song.network.javaio.io.io_02_niojava.api.channel;
 
 import org.junit.jupiter.api.Test;
 
@@ -18,29 +18,60 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class FileTestCase {
+public class Channel_02_FileChannel_Demo {
 
     /********************Files*************************/
-    /**
-     * Files 是JDK8 自带的文件工具, 功能十分强大
-     */
 
     /**
-     * 递归目录 如何展示?
+     * Files 是 java.nio包下的文件工具类
      */
     @Test
-    public void files4() throws IOException {
-        Path startingDir = Paths.get("D:\\临时");
-        List<Path> result = new LinkedList<Path>();
-        Path path = Files.walkFileTree(startingDir, new FindJavaVisitor(result));
-        System.out.println(result);
+    public void test_01_Files() throws IOException {
+        // 创建目录
+        Files.createDirectory(Paths.get("D:\\临时\\temp\\createone"));
+        // 创建多层级目录
+        Files.createDirectories(Paths.get("D:\\临时\\temp\\createtwo\\son"));
+        // 创建文件
+        // 必须先有目录，才能在目录中创建文件。
+        Files.createFile(Paths.get("D:\\临时\\temp\\mappedByteBuffer_OS.txt"));
+    }
+
+    /**
+     * 文件复制:
+     * <p>
+     * 从文件复制到文件：
+     * Files.copy(Path source, Path target, CopyOption options);
+     * <p>
+     * 从输入流复制到文件：
+     * Files.copy(InputStream in, Path target, CopyOption options);
+     * <p>
+     * 从文件复制到输出流：
+     * Files.copy(Path source, OutputStream out);
+     */
+    @Test
+    public void test_01_Files_copy() throws IOException {
+
+        // 文件 复制到 输出流
+        Files.copy(Paths.get("D:\\临时\\temp\\text.txt"),
+                System.out);
+
+        // 文件 复制到 文件 存在则替换
+        Files.copy(Paths.get("D:\\临时\\temp\\text.txt"),
+                Paths.get("D:\\临时\\temp\\text.txt.copy"),
+                StandardCopyOption.REPLACE_EXISTING);
+
+        System.out.println("aaabbb");
+        // 输入流 复制到 文件 存在则替换
+        Files.copy(System.in,
+                Paths.get("D:\\临时\\temp\\text.txt.System.in"),
+                StandardCopyOption.REPLACE_EXISTING);
     }
 
     /**
      * 遍历 单个目录
      */
     @Test
-    public void files3() {
+    public void test_01_Files_dir() {
         Path dir = Paths.get("D:\\临时");
 
         // 方式1
@@ -63,53 +94,20 @@ public class FileTestCase {
             e.printStackTrace();
         }
     }
+    /**
+     * Files 是JDK8 自带的文件工具, 功能十分强大
+     */
 
     /**
-     * 文件复制:
-     * <p>
-     * 从文件复制到文件：
-     * Files.copy(Path source, Path target, CopyOption options);
-     * <p>
-     * 从输入流复制到文件：
-     * Files.copy(InputStream in, Path target, CopyOption options);
-     * <p>
-     * 从文件复制到输出流：
-     * Files.copy(Path source, OutputStream out);
+     * 递归目录
      */
     @Test
-    public void files2() throws IOException {
-
-        // 文件 复制到 输出流
-        Files.copy(Paths.get("D:\\临时\\temp\\text.txt"),
-                System.out);
-
-        // 文件 复制到 文件 存在则替换
-        Files.copy(Paths.get("D:\\临时\\temp\\text.txt"),
-                Paths.get("D:\\临时\\temp\\text.txt.copy"),
-                StandardCopyOption.REPLACE_EXISTING);
-
-        System.out.println("aaabbb");
-        // 输入流 复制到 文件 存在则替换
-        Files.copy(System.in,
-                Paths.get("D:\\临时\\temp\\text.txt.System.in"),
-                StandardCopyOption.REPLACE_EXISTING);
+    public void files_01_Files_recursion() throws IOException {
+        Path startingDir = Paths.get("D:\\临时");
+        List<Path> result = new LinkedList<Path>();
+        Path path = Files.walkFileTree(startingDir, new FindJavaVisitor(result));
+        System.out.println(result);
     }
-
-    /**
-     * Files 是 java.nio包下的文件工具类
-     */
-    @Test
-    public void files1() throws IOException {
-        // 创建目录
-        Files.createDirectory(Paths.get("D:\\临时\\temp\\createone"));
-        // 创建多层级目录
-        Files.createDirectories(Paths.get("D:\\临时\\temp\\createtwo\\son"));
-        // 创建文件
-        // 必须先有目录，才能在目录中创建文件。
-        Files.createFile(Paths.get("D:\\临时\\temp\\mappedByteBuffer_OS.txt"));
-    }
-
-    /******************Path***********************/
 
     /**
      * 遍历整个文件目录
@@ -117,12 +115,14 @@ public class FileTestCase {
      * @throws IOException
      */
     @Test
-    public void test6() throws IOException {
+    public void test_01_Files_AllDir() throws IOException {
         Path startingDir = Paths.get("D:\\workspace\\project\\idea-git\\song\\labortory\\javase\\src\\main\\java\\io");
         List<Path> result = new LinkedList<Path>();
         Files.walkFileTree(startingDir, new FindJavaVisitor(result));
         System.out.println("result.size()=" + result.size());
     }
+
+    /******************Path***********************/
 
 
     private static class FindJavaVisitor extends SimpleFileVisitor<Path> {
@@ -145,7 +145,7 @@ public class FileTestCase {
      * path 文件写入
      */
     @Test
-    public void test5() {
+    public void test_01_Paths_write() {
         try {
             BufferedWriter writer = Files.newBufferedWriter(
                     Paths.get("D:\\临时\\temp\\text.txt"), StandardCharsets.UTF_8);
@@ -161,7 +161,7 @@ public class FileTestCase {
      * path文件读取
      */
     @Test
-    public void test4() {
+    public void test_01_Files_read() {
         try {
             // path 文件读取
             BufferedReader reader = Files.newBufferedReader(
@@ -176,30 +176,11 @@ public class FileTestCase {
     }
 
     /**
-     * 文件创建 转换读取方式
-     *
-     * @throws IOException
-     */
-    @Test
-    public void test3() throws IOException {
-
-        // file 转 path
-        File file = new File("D:\\临时\\temp\\text.txt");
-        Path path = file.toPath();
-
-        // path 不存在 则创建
-        if (!Files.exists(path)) {
-            Files.createFile(path);
-        }
-
-    }
-
-    /**
      * Path 获取一个文件
      * Path 就是取代File的
      */
     @Test
-    public void test2() {
+    public void test_02_Path() throws IOException {
         // Path 通过静态方法获取文件
         Path path = Paths.get("D:\\临时\\temp\\text.txt");
 //        Path path2 = Paths.get("D:\\", "临时\\temp\\text.txt");
@@ -208,6 +189,16 @@ public class FileTestCase {
         System.out.println(path.getRoot());
         System.out.println(path.getFileName());
         System.out.println(path.getNameCount());
+
+
+        // file 转 path
+        File file = new File("D:\\临时\\temp\\text.txt");
+        Path path2 = file.toPath();
+
+        // path 不存在 则创建
+        if (!Files.exists(path2)) {
+            Files.createFile(path2);
+        }
 
     }
 
@@ -225,17 +216,16 @@ public class FileTestCase {
     }
 
 
-
     //自动资源管理：自动关闭实现 AutoCloseable 接口的资源
     @Test
-    public void test8(){
-        try(FileChannel inChannel = FileChannel.open(Paths.get("1.jpg"), StandardOpenOption.READ);
-            FileChannel outChannel = FileChannel.open(Paths.get("2.jpg"), StandardOpenOption.WRITE, StandardOpenOption.CREATE)){
+    public void test8() {
+        try (FileChannel inChannel = FileChannel.open(Paths.get("1.jpg"), StandardOpenOption.READ);
+             FileChannel outChannel = FileChannel.open(Paths.get("2.jpg"), StandardOpenOption.WRITE, StandardOpenOption.CREATE)) {
 
             ByteBuffer buf = ByteBuffer.allocate(1024);
             inChannel.read(buf);
 
-        }catch(IOException e){
+        } catch (IOException e) {
 
         }
     }
@@ -248,7 +238,7 @@ public class FileTestCase {
             OutputStream newOutputStream(Path path, OpenOption…how) : 获取 OutputStream 对象
      */
     @Test
-    public void test7() throws IOException{
+    public void test7() throws IOException {
         SeekableByteChannel newByteChannel = Files.newByteChannel(Paths.get("1.jpg"), StandardOpenOption.READ);
 
         DirectoryStream<Path> newDirectoryStream = Files.newDirectoryStream(Paths.get("e:/"));
@@ -270,7 +260,7 @@ public class FileTestCase {
             public static <A extends BasicFileAttributes> A readAttributes(Path path,Class<A> type,LinkOption... options) : 获取与 path 指定的文件相关联的属性。
      */
     @Test
-    public void test6_() throws IOException{
+    public void test6_() throws IOException {
         Path path = Paths.get("e:/nio/hello7.txt");
 //		System.out.println(Files.exists(path, LinkOption.NOFOLLOW_LINKS));
 
@@ -293,7 +283,7 @@ public class FileTestCase {
             long size(Path path) : 返回 path 指定文件的大小
      */
     @Test
-    public void test5_() throws IOException{
+    public void test5_() throws IOException {
         Path path1 = Paths.get("e:/nio/hello2.txt");
         Path path2 = Paths.get("e:/nio/hello7.txt");
 
@@ -303,7 +293,7 @@ public class FileTestCase {
     }
 
     @Test
-    public void test4_() throws IOException{
+    public void test4_() throws IOException {
         Path dir = Paths.get("e:/nio/nio2");
 //		Files.createDirectory(dir);
 
@@ -314,7 +304,7 @@ public class FileTestCase {
     }
 
     @Test
-    public void test3_() throws IOException{
+    public void test3_() throws IOException {
         Path path1 = Paths.get("e:/nio/hello.txt");
         Path path2 = Paths.get("e:/nio/hello2.txt");
 
@@ -338,7 +328,7 @@ public class FileTestCase {
             String toString() ： 返回调用 Path 对象的字符串表示形式
      */
     @Test
-    public void test2_(){
+    public void test2_() {
         Path path = Paths.get("e:/nio/hello.txt");
 
         System.out.println(path.getParent());
@@ -355,7 +345,7 @@ public class FileTestCase {
     }
 
     @Test
-    public void test1_(){
+    public void test1_() {
         Path path = Paths.get("e:/", "nio/hello.txt");
 
         System.out.println(path.endsWith("hello.txt"));

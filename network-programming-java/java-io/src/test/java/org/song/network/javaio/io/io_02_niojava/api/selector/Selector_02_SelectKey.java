@@ -2,7 +2,7 @@ package org.song.network.javaio.io.io_02_niojava.api.selector;
 
 import org.junit.jupiter.api.Test;
 
-public class Selector_01_structure_02_SelectKey {
+public class Selector_02_SelectKey {
 
     /**
      * SelectionKey 抽象类
