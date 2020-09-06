@@ -1,11 +1,11 @@
-package org.song.network.javaio.socket;
+package org.song.network.javaio.io.io_01_bio.api.address;
 
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.net.Socket;
 
-public class SocketTestLocal {
+public class Socket_01_base {
 
     /**
      * ServerSocket: 服务端Socket

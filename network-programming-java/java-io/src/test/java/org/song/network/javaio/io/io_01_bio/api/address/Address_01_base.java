@@ -1,4 +1,4 @@
-package org.song.network.javaio.socket;
+package org.song.network.javaio.io.io_01_bio.api.address;
 
 import org.junit.jupiter.api.Test;
 
@@ -8,7 +8,7 @@ import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.util.Enumeration;
 
-public class IPTestLocal {
+public class Address_01_base {
 
     /**
      * InetAddress 代表主机的IP地址
