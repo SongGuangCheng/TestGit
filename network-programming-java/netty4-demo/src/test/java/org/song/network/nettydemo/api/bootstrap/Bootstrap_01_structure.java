@@ -1,4 +1,4 @@
-package org.song.network.nettydemo.api;
+package org.song.network.nettydemo.api.bootstrap;
 
 import org.junit.jupiter.api.Test;
 
