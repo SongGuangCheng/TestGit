@@ -21,8 +21,12 @@ public class ByteBuf_02_api_01_Create {
         /**
          * 1. 创建一个新的缓冲区
          */
+        // 分配一个可动态扩容的 堆 缓冲区
+        Unpooled.buffer();
         // 分配固定长度 堆 缓冲区
         ByteBuf buffer = Unpooled.buffer(16);
+        // 可动态扩容的 直接 缓冲区
+        Unpooled.directBuffer();
         // 分配固定长度 直接 缓冲区
         Unpooled.directBuffer(16);
 

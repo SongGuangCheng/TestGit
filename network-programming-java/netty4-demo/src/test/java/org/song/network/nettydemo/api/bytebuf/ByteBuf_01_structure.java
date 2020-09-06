@@ -40,4 +40,25 @@ public class ByteBuf_01_structure {
     public void test_01_ByteBuf(){
 
     }
+
+    /**
+     * ByteBufAllocator 缓冲区内存分配器
+     *
+     * ByteBufAllocator 接口
+     * -    - AbstractByteBufAllocator 抽象类
+     * -    -   - PooledByteBufAllocator 类
+     * -    -   - UnpooledByteBufAllocator 类
+     *
+     * ByteBufAllocatorMetricProvider 接口
+     * -    - PooledByteBufAllocator 类
+     * -    - UnpooledByteBufAllocator 类
+     *
+     * ByteBufAllocatorMetric 接口
+     * -    - PooledByteBufAllocatorMetric 类
+     * -    - UnpooledByteBufAllocatorMetric 类
+     *
+     */
+    public void test_02_ByteBufAllocator(){
+
+    }
 }
