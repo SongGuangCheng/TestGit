@@ -8,6 +8,7 @@ public class NettyDemoApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(NettyDemoApplication.class, args);
+        //我就打个备注
     }
 
 }
